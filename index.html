@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ SURI | AI Powered 4-Deck Mixing</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="deck-selector-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Load Track to Deck:</h3>
+            <div class="deck-choices">
+                <button onclick="loadToDeck('A')" class="deck-btn a">DECK A</button>
+                <button onclick="loadToDeck('B')" class="deck-btn b">DECK B</button>
+                <button onclick="loadToDeck('C')" class="deck-btn c">DECK C</button>
+                <button onclick="loadToDeck('D')" class="deck-btn d">DECK D</button>
+            </div>
+            <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="brand">
+                <h1>DJ <span class="neon-text">SURI</span></h1>
+                <span class="sub-brand">AI MIXING STATION</span>
+            </div>
+            
+            <div class="master-controls">
+                <div class="bpm-display">MASTER BPM: <span id="master-bpm">128</span></div>
+                <button id="toggle-ai-btn" class="ai-btn">
+                    <span class="icon">🤖</span> ACTIVATE AI
+                </button>
+            </div>
+        </header>
+
+        <div class="decks-grid">
+            <div class="deck deck-a" id="deck-a">
+                <div class="deck-header">DECK A <span class="status-dot"></span></div>
+                <canvas id="viz-a"></canvas>
+                <div class="track-title" id="title-a">Empty</div>
+                <div class="controls">
+                    <button onclick="decks.A.togglePlay()">⏯</button>
+                    <button onclick="decks.A.toggleFx('echo')">Echo</button>
+                    <input type="range" class="vol-slider" min="0" max="1" step="0.01" value="1" oninput="decks.A.setVolume(this.value)">
+                </div>
+            </div>
+
+            <div class="deck deck-b" id="deck-b">
+                <div class="deck-header">DECK B <span class="status-dot"></span></div>
+                <canvas id="viz-b"></canvas>
+                <div class="track-title" id="title-b">Empty</div>
+                <div class="controls">
+                    <button onclick="decks.B.togglePlay()">⏯</button>
+                    <button onclick="decks.B.toggleFx('reverb')">Verb</button>
+                    <input type="range" class="vol-slider" min="0" max="1" step="0.01" value="1" oninput="decks.B.setVolume(this.value)">
+                </div>
+            </div>
+
+            <div class="deck deck-c" id="deck-c">
+                <div class="deck-header">DECK C <span class="status-dot"></span></div>
+                <canvas id="viz-c"></canvas>
+                <div class="track-title" id="title-c">Empty</div>
+                <div class="controls">
+                    <button onclick="decks.C.togglePlay()">⏯</button>
+                    <button onclick="decks.C.toggleFx('filter')">Filt</button>
+                    <input type="range" class="vol-slider" min="0" max="1" step="0.01" value="1" oninput="decks.C.setVolume(this.value)">
+                </div>
+            </div>
+
+            <div class="deck deck-d" id="deck-d">
+                <div class="deck-header">DECK D <span class="status-dot"></span></div>
+                <canvas id="viz-d"></canvas>
+                <div class="track-title" id="title-d">Empty</div>
+                <div class="controls">
+                    <button onclick="decks.D.togglePlay()">⏯</button>
+                    <button onclick="decks.D.toggleFx('flanger')">Flang</button>
+                    <input type="range" class="vol-slider" min="0" max="1" step="0.01" value="1" oninput="decks.D.setVolume(this.value)">
+                </div>
+            </div>
+        </div>
+
+        <div class="library-section">
+            <div class="lib-header">
+                <h3>MUSIC LIBRARY</h3>
+                <div class="lib-actions">
+                    <button onclick="loadOnlineDemo()" class="demo-btn">🌐 Load Online Demo</button>
+                    <label class="upload-btn">
+                        📂 Local Files
+                        <input type="file" id="file-upload" multiple accept="audio/*" hidden>
+                    </label>
+                </div>
+            </div>
+            <ul id="playlist"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
